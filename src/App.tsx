@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, CircularProgress, Container, Typography, Stack } from '@mui/material';
 import axios from 'axios';
+import joke from './joke.gif'
 
 type Joke = {
   joke: string;
@@ -42,7 +43,7 @@ const JokesApp: React.FC = () => {
     <Container maxWidth="sm" sx={{ marginTop: '2rem' }}>
       <Stack spacing={2} sx={{ bgcolor: 'success.main', borderRadius: "10px" }}>
       <Typography variant="h4" align="center" sx={{margin: "1rem auto", color: "white"}} gutterBottom>
-      Tell me a Joke
+      Tell me a Joke <img src={joke} alt="joke icon" />
       </Typography>
       </Stack>
       <Stack spacing={2}>

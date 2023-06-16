@@ -1,7 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Button, CircularProgress, Container, Typography, Stack } from '@mui/material';
-import axios from 'axios';
-import joke from './joke.gif'
+import React, { useState, useEffect } from "react";
+import {
+  Button,
+  CircularProgress,
+  Container,
+  Typography,
+  Stack,
+  Grid,
+  Icon,
+} from "@mui/material";
+import axios from "axios";
+import joke from "./joke.gif";
 
 type Joke = {
   joke: string;
@@ -15,9 +23,9 @@ const JokesApp: React.FC = () => {
     setIsLoading(true);
     try {
       const responses = await Promise.all([
-        axios.get('https://v2.jokeapi.dev/joke/Programming?type=single'),
-        axios.get('https://v2.jokeapi.dev/joke/Programming?type=single'),
-        axios.get('https://v2.jokeapi.dev/joke/Programming?type=single'),
+        axios.get("https://v2.jokeapi.dev/joke/Programming?type=single"),
+        axios.get("https://v2.jokeapi.dev/joke/Programming?type=single"),
+        axios.get("https://v2.jokeapi.dev/joke/Programming?type=single"),
       ]);
       const newJokes: Joke[] = responses.map((response) => ({
         joke: response.data.joke,
@@ -25,7 +33,7 @@ const JokesApp: React.FC = () => {
       newJokes.sort((a, b) => a.joke.length - b.joke.length);
       setJokes(newJokes);
     } catch (error) {
-      console.log('Error fetching joke:', error);
+      console.log("Error fetching joke:", error);
     } finally {
       setIsLoading(false);
     }
@@ -40,28 +48,52 @@ const JokesApp: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ marginTop: '2rem' }}>
-      <Stack spacing={2} sx={{ bgcolor: 'success.main', borderRadius: "10px" }}>
-      <Typography variant="h4" align="center" sx={{margin: "1rem auto", color: "white"}} gutterBottom>
-      Tell me a Joke <img src={joke} alt="joke icon" />
-      </Typography>
+    <Container maxWidth="sm" sx={{ marginTop: "2rem" }}>
+      <Stack spacing={2} sx={{ bgcolor: "success.main", borderRadius: "10px" }}>
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Typography
+            variant="h4"
+            align="center"
+            sx={{ margin: "1rem", color: "white" }}
+            gutterBottom
+          >
+            Tell me a Joke{" "}
+            </Typography>
+        <img src={joke} alt="joke icon" width="40" height="40" />
+        </Grid>
       </Stack>
       <Stack spacing={2}>
-      {isLoading ? (
-        <CircularProgress sx={{ display: 'block', margin: '7rem auto' }} />
-      ) : (
-        <ul>
-          {jokes.map((joke, index) => (
-            <Typography key={index} variant="body1" component="li" sx={{ marginBottom: '2rem', listStyleType: "none" }}>
-              {joke.joke}
-            </Typography>
-          ))}
-        </ul>
-      )}
+        {isLoading ? (
+          <CircularProgress sx={{ display: "block", margin: "7rem auto" }} />
+        ) : (
+          <ul>
+            {jokes.map((joke, index) => (
+              <Typography
+                key={index}
+                variant="body1"
+                component="li"
+                sx={{ marginBottom: "2rem", listStyleType: "none" }}
+              >
+                {joke.joke}
+              </Typography>
+            ))}
+          </ul>
+        )}
       </Stack>
-      
-      <Button variant="contained" onClick={refreshJokes} disabled={isLoading} sx={{borderRadius: "10px"}} fullWidth>
-        {isLoading ? 'Loading...' : 'Refresh'}
+
+      <Button
+        variant="contained"
+        onClick={refreshJokes}
+        disabled={isLoading}
+        sx={{ borderRadius: "10px" }}
+        fullWidth
+      >
+        {isLoading ? "Loading..." : "Refresh"}
       </Button>
     </Container>
   );

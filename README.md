@@ -1,5 +1,9 @@
 # This is reactjs simple application that will generate joke when refreshed
 
+## How run locally 
+> npm install
+> npm run start
+
 ## Features
 - Created with typescript
 - Added simple UI 
@@ -7,5 +11,5 @@
 - Ordered by shorted to longest
 - Added Refresh Button
 
-## Demo Link
-[Tell Me A Joke](https://github.com)
+## Live Demo Link
+[Tell Me A Joke](https://tellmeajokes.netlify.app/)

@@ -6,7 +6,6 @@ import {
   Typography,
   Stack,
   Grid,
-  Icon,
 } from "@mui/material";
 import axios from "axios";
 import joke from "./joke.gif";
